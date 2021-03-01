@@ -1,3 +1,3 @@
 # Metaforums
 
-Forums Website for practice purpose
+Simple forums Website for practice purpose
