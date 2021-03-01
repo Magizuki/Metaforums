@@ -35,6 +35,10 @@
         .btn{
             border-radius: 20px;
         }
+
+        .form-control{
+            border-radius: 20px;
+        }
     
     </style>
 </head>

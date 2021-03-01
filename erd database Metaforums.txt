@@ -1,0 +1,15 @@
+erd database :
+
+User : UserID, Username, email, password, rolesID, status, lastactive, postcount
+
+roles : rolesID, rolesname
+
+topics : topicsID, topicsname
+
+topicsdetail : topicsID, subtopicname
+
+thread : threadID, userID, title, threadcontent, postdate, topicID
+
+threadDetail : userID (reply), threadID, comment, replydate
+
+
