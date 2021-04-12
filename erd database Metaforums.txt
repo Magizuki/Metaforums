@@ -1,15 +1,52 @@
-erd database :
 
-User : UserID, Username, email, password, rolesID, status, lastactive, postcount
+Role : guest, user, moderator, site admin
+Online Status : Online, Offline
+Moderation Status : Active, Silenced, Banned
 
-roles : rolesID, rolesname
+metaforums db erd :
 
-topics : topicsID, topicsname
+User :
+- Id	PK
+- email
+- username
+- password
+- Role
+- onlinestatus
+- ProfileImage
+- EmailVerifyStatus
+- LastLogInDate
+- ModerationStatus
+- Address
 
-topicsdetail : topicsID, subtopicname
+ThreadTopic :
+- Id	PK
+- Name
 
-thread : threadID, userID, title, threadcontent, postdate, topicID
+ThreadSubTopic :
+- Id	PK
+- ThreadTopicId	FK
+- Name
 
-threadDetail : userID (reply), threadID, comment, replydate
+Thread :
+- Id	PK
+- title
+- content
+- creatorId	FK
+- created_at
+- updated_at
+- ThreadSubTopicId	FK 
 
+Favorite :
+- UserId	PK FK
+- ThreadId	PK FK
 
+Viewer :
+- UserId	PK FK
+- ThreadId	PK FK
+
+Reply :
+- userId	FK
+- ThreadId	FK
+- Message
+- created_at
+- updated_at  

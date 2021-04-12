@@ -23,15 +23,15 @@
         }
 
         form{
-            margin-left: 40%;
-            margin-right: 40%;
+            margin-left: 35%;
+            margin-right: 35%;
         }
 
         button{
             width: 100%;
         }
 
-        .btn{
+        .btn, .form-control{
             border-radius: 20px;
         }
     
