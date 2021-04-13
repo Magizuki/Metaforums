@@ -1,4 +1,3 @@
-
 Role : guest, user, moderator, site admin
 Online Status : Online, Offline
 Moderation Status : Active, Silenced, Banned
@@ -36,13 +35,10 @@ Thread :
 - updated_at
 - ThreadSubTopicId	FK 
 
-Favorite :
-- UserId	PK FK
-- ThreadId	PK FK
-
 Viewer :
 - UserId	PK FK
 - ThreadId	PK FK
+- isFavorite
 
 Reply :
 - userId	FK
@@ -50,3 +46,4 @@ Reply :
 - Message
 - created_at
 - updated_at  
+
