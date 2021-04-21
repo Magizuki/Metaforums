@@ -17,6 +17,12 @@ function Username_IsNotExist()
             console.log(data['isNotExist'])
 
             usernameIsNotExist = data['isNotExist']
+
+            if(usernameIsNotExist == 'false')
+            {
+                document.getElementById('errorMessage').innerHTML = "Username is already taken/ Username must only contain alphanumeric characters / Username must be between 6 and 20 characters long"
+            }
+
             console.log(usernameIsNotExist);
             
         }
@@ -60,10 +66,9 @@ function handleRegisterForm() {
 
     email = document.getElementById("email").value
     username = document.getElementById("username").value
+    Username_IsNotExist()
     password = document.getElementById("password").value 
     confirmpassword = document.getElementById("confirmpassword").value
-
-    Username_IsNotExist()
 
     // var patt1 ini adalah regex untuk ngecek apakah username sudah alphanumeric atau belum
     var patt1 = /^[a-z0-9-\'_\.,:\(\)&\[\]\/+=\?#@ \xC0-\xFF]+$/i
@@ -74,7 +79,7 @@ function handleRegisterForm() {
         // alert("Invalid e-mail format")
         
     }
-    else if(usernameIsNotExist == 'false' || ( username.length < 6 || username.length > 20 ) || username.match(patt1) != username )
+    else if(( username.length < 6 || username.length > 20 ) || username.match(patt1) != username )
     {
         document.getElementById('errorMessage').innerHTML = "Username is already taken/ Username must only contain alphanumeric characters / Username must be between 6 and 20 characters long"
     }
