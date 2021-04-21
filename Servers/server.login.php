@@ -3,8 +3,4 @@
     include("db.php");
 
 
-
-
-
-
 ?>
