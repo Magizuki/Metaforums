@@ -39,7 +39,6 @@
     </style>
 </head>
 <body>
-    
     <div class="container-fluid">
         <a href="Register.php">SIGN UP</a>
         <br>
@@ -47,7 +46,7 @@
         <div class="container">
             <h1>Metaforums</h1>
             <br>
-            <form method="POST">
+            <form method="POST" action="../../servers/server.reset_password.php">
                 <div class="form-group">
                     <input type="email" class="form-control" id="email" name="email"  placeholder="E-mail">
                 </div>
@@ -59,8 +58,6 @@
             <br>
             <a href="Login.php">Back to Login</a>
         </div>
-    
     </div>
-    
 </body>
 </html>

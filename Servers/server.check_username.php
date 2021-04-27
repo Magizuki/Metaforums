@@ -1,10 +1,11 @@
 <?php
 
     include("db.php");
+    require_once("../models/user.php");
 
-    $username = $_POST['username'];
-
-    $query = "SELECT * FROM user WHERE username = '$username'";
+    $user = new user();
+    $user->set_username($_POST["username"]);
+    $query = "SELECT * FROM user WHERE username = '".$user->get_username()."'";
 
     $result = mysqli_query($conn, $query);
     

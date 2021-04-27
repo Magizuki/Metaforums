@@ -39,7 +39,6 @@
     </style>
 </head>
 <body>
-    
     <div class="container-fluid">
         <a href="Register.php">SIGN UP</a>
         <br>
@@ -47,7 +46,7 @@
         <div class="container">
             <h1>Metaforums</h1>
             <br>
-            <form method="POST">
+            <form method="POST" action="../../Servers/server.login.php">
                 <div class="form-group">
                     <input type="text" class="form-control" id="UsernameEmail" name="UsernameEmail"  placeholder="Username or E-mail">
                 </div>
