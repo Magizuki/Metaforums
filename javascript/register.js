@@ -1,5 +1,5 @@
 
-var email, username, password, confirmpassword, usernameIsNotExist
+var email, username, password, confirmpassword, usernameIsNotExist, flag
 
 
 function Username_IsNotExist()
@@ -13,18 +13,17 @@ function Username_IsNotExist()
         },
         success: function(data)
         {
+            console.log(data);
             data = JSON.parse(data);
-            console.log(data['isNotExist'])
 
             usernameIsNotExist = data['isNotExist']
 
             if(usernameIsNotExist == 'false')
             {
                 document.getElementById('errorMessage').innerHTML = "Username is already taken/ Username must only contain alphanumeric characters / Username must be between 6 and 20 characters long"
+                window.stop()
             }
 
-            console.log(usernameIsNotExist);
-            
         }
     
     })
@@ -44,6 +43,7 @@ function submitRegisterForm()
         },
         success: function(data)
         {
+            console.log(data)
             data = JSON.parse(data);
             if(data['status'] == 'success')
             {
@@ -60,9 +60,10 @@ function submitRegisterForm()
 
 }
 
-
-
 function handleRegisterForm() {
+
+    flag = 0
+    document.getElementById('errorMessage').innerHTML = ""
 
     email = document.getElementById("email").value
     username = document.getElementById("username").value
@@ -73,26 +74,33 @@ function handleRegisterForm() {
     // var patt1 ini adalah regex untuk ngecek apakah username sudah alphanumeric atau belum
     var patt1 = /^[a-z0-9-\'_\.,:\(\)&\[\]\/+=\?#@ \xC0-\xFF]+$/i
 
-    if(email == "" || email.indexOf(".") == -1 || email.indexOf("@") == -1 ){
+    if(email == "" || email.indexOf(".") == -1 || email.indexOf("@") == -1 && flag == 0){
+        flag = 1
         document.getElementById('errorMessage').innerHTML = "Invalid e-mail format" 
         //$('#errorMessage').text = "Invalid e-mail format"
         // alert("Invalid e-mail format")
         
     }
-    else if(( username.length < 6 || username.length > 20 ) || username.match(patt1) != username )
+    if((username.length < 6 || username.length > 20 ) || username.match(patt1) != username && flag == 0 )
     {
+        flag = 1
+        console.log("Hello World")
         document.getElementById('errorMessage').innerHTML = "Username is already taken/ Username must only contain alphanumeric characters / Username must be between 6 and 20 characters long"
     }
-    else if(password.length < 8)
+    if(password.length < 8 && flag == 0)
     {
+        flag = 1
         document.getElementById('errorMessage').innerHTML = "Password must be at least 8 characters long"
     }
-    else if(password != confirmpassword)
+    if(password != confirmpassword && flag == 0)
     {
+        flag = 1
         document.getElementById('errorMessage').innerHTML = "Please correctly confirm the password"
     }
     else
     {
+        flag = 1
+        console.log(usernameIsNotExist)
         submitRegisterForm()
     }
 
