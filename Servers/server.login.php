@@ -24,7 +24,7 @@
         $_SESSION["email"] = $row["email"];
 
         $id = $_SESSION["UserID"];
-        $date = date('y-m-d h:i:s');
+        $date = date("Y-m-d h:i:sa");
 
         $query2 = "UPDATE user SET onlinestatus = 'Online', logindate= '$date' WHERE id = '$id';";
 

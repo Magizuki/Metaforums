@@ -25,68 +25,20 @@
     </style>
 </head>
 <body>
-    <?php
-        if(isset($_SESSION["UserID"]))
-        { 
-            if($_SESSION["role"] == "USER")
-            {
+    <?php 
+        require_once("../layouts/header.php");
     ?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2">
-                <a href="auth/Logout.php">LOGOUT</a>
-            </div>
-            <div class="col-8">
-                <a href="Home.php"><h1>Metaforums</h1></a>
-            </div>
-            <div class="col-2">
-                <a href="">ACCOUNT</a>
-            </div>
-        </div>
+    <br>
+    <br>
+    <div class="container-fluid" style="display: inline;">
+        <h5 style="display: inline;">Forum Groups</h3>
+        <hr style="float: right; width: 88%;">
     </div>
-    <?php
-            }
-            else if($_SESSION["role"] == "MODERATOR")
-            {
-    ?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2">
-                <a href="auth/Logout.php">LOGOUT</a>
-            </div>
-            <div class="col-8">
-                <a href="Home.php"><h1>Metaforums</h1></a>
-            </div>
-            <div class="col-2">
-                <a href="">USER MANAGEMENT</a>
-            </div>
-            <div class="col-2">
-                <a href="">ACCOUNT</a>
-            </div>
-        </div>
-    </div>
-    <?php
-            }
-        }
-        else
-        {
-    ?>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-1">
-                <a href="auth/Login.php">LOG IN</a>
-            </div>
-            <div class="col-5">
-                <a href="auth/Register.php">SIGN UP</a>
-            </div>
-            <div class="col-1">
-                <a href="Home.php"><h1>Metaforums</h1></a>
-            </div>
-        </div>
-    </div>
-    <?php
-        }
-        
-    ?>
+    <br>
+    <br>
+
+
+
+
 </body>
 </html>
