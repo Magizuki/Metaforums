@@ -62,7 +62,7 @@ function submitRegisterForm()
 
 function handleRegisterForm() {
 
-    flag = 0
+    
     document.getElementById('errorMessage').innerHTML = ""
 
     email = document.getElementById("email").value
@@ -74,34 +74,32 @@ function handleRegisterForm() {
     // var patt1 ini adalah regex untuk ngecek apakah username sudah alphanumeric atau belum
     var patt1 = /^[a-z0-9-\'_\.,:\(\)&\[\]\/+=\?#@ \xC0-\xFF]+$/i
 
-    if(email == "" || email.indexOf(".") == -1 || email.indexOf("@") == -1 && flag == 0){
-        flag = 1
-        document.getElementById('errorMessage').innerHTML = "Invalid e-mail format" 
+    if(email == "" || email.indexOf(".") == -1 || email.indexOf("@") == -1){
+        
+        document.getElementById('errorMessage').innerHTML = "Invalid e-mail format"
+        return 
         //$('#errorMessage').text = "Invalid e-mail format"
         // alert("Invalid e-mail format")
         
     }
-    if((username.length < 6 || username.length > 20 ) || username.match(patt1) != username && flag == 0 )
-    {
-        flag = 1
-        console.log("Hello World")
+    if((username.length < 6 || username.length > 20 ) || username.match(patt1) != username )
+    {        
         document.getElementById('errorMessage').innerHTML = "Username is already taken/ Username must only contain alphanumeric characters / Username must be between 6 and 20 characters long"
+        return
     }
-    if(password.length < 8 && flag == 0)
-    {
-        flag = 1
-        document.getElementById('errorMessage').innerHTML = "Password must be at least 8 characters long"
+    if(password.length < 8 )
+    {   document.getElementById('errorMessage').innerHTML = "Password must be at least 8 characters long"
+        return
     }
-    if(password != confirmpassword && flag == 0)
-    {
-        flag = 1
+    if(password != confirmpassword )
+    {        
         document.getElementById('errorMessage').innerHTML = "Please correctly confirm the password"
+        return
     }
     else
-    {
-        flag = 1
-        console.log(usernameIsNotExist)
+    {        
         submitRegisterForm()
+        return
     }
 
 }
