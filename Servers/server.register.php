@@ -13,6 +13,8 @@
     $user->set_moderationstatus("Active");
     $user->set_avatar("http://localhost/Metaforums/assets/avatars/DefaultAvatar.jpg");
 
+    
+
     function sendEmail($email)
     {
         require_once("../PHPMailer/PHPMailerAutoload.php");
@@ -135,5 +137,8 @@
             'error_message' => mysqli_error($conn)
         ]);
     }
+
+    mysqli_close($conn);
+
 
 ?>

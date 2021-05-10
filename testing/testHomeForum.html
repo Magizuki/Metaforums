@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Vertical Tabs</title>
+
+    <style>
+
+        body{
+          margin:10px;
+        }
+
+        * {box-sizing: border-box}
+
+        /* Style the tab */
+        .tab {
+        float: left;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        width: 10%;
+        height: 300px;
+        overflow: auto;
+        }
+
+        .tab2 button {
+        display: block;
+        background-color: inherit;
+        color: black;
+        padding: 22px 16px;
+        width: 100%;
+        border: none;
+        outline: none;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.3s;
+        }
+
+        .tab2 {
+        float: left;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        width: 10%;
+        height: 300px;
+        overflow: auto;
+        
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+        display: block;
+        background-color: inherit;
+        color: black;
+        padding: 22px 16px;
+        width: 100%;
+        border: none;
+        outline: none;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+        background-color: #ddd;
+        }
+
+        .tab2 button:hover {
+        background-color: #ddd;
+        }
+
+        /* Create an active/current "tab button" class */
+        .tab button.active {
+        background-color: rgb(247, 16, 16);
+        }
+
+        .tab2 button.active {
+        background-color: rgb(247, 16, 16);
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+        float: left;
+        padding: 0px 12px;
+        border: 1px solid #ccc;
+        width: 70%;
+        border-left: none;
+        height: 300px;
+        display: none;
+        
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="tab">
+        <button id="defaultOpen" class="tablinks" onclick="openCity(event, 'SonyConsole')">Sony Console</button>
+        <button class="tablinks" onclick="openCity(event, 'SonyHandheld')">Sony Handheld</button>
+        <button class="tablinks" onclick="openCity(event, 'Nintendo_Console')">Nintendo Console</button>
+        <button class="tablinks" onclick="openCity(event, 'NintendoHandheld')">Nintendo Handheld</button>
+        <button class="tablinks" onclick="openCity(event, 'Microsoft')">Microsoft</button>
+    </div>
+
+    <div class="tab2">
+        <button id="defaultOpen2" class="SonyConsole" onclick="openCity2(event, 'PS1')">PS1</button>
+        <button class="SonyConsole" onclick="openCity2(event, 'PS2')">PS2</button>
+        <button class="SonyConsole" onclick="openCity2(event, 'PS3')">PS3</button>
+        <button class="SonyConsole" onclick="openCity2(event, 'PS4')">PS4</button>
+        <button class="SonyConsole" onclick="openCity2(event, 'PS5')">PS5</button>
+        <button class="Microsoft" onclick="openCity2(event, 'XBOX_360')">XBOX_360</button>
+        <button class="Microsoft" onclick="openCity2(event, 'XBOX_ONE')">XBOX_ONE</button>
+        <button class="Nintendo_Console" onclick="openCity2(event, 'Nintendo_Switch')">Nintendo_Switch</button>
+        <button class="NintendoHandheld" onclick="openCity2(event, 'Nintendo_DS')">Nintendo_DS</button>
+        <button class="NintendoHandheld" onclick="openCity2(event, 'Nintendo_3DS')">Nintendo_3DS</button>
+        <button class="SonyHandheld" onclick="openCity2(event, 'PSP')">PSP</button>
+        <button class="SonyHandheld" onclick="openCity2(event, 'PS_VITA')">PS_VITA</button>
+
+    </div>
+  
+      <div id="PS1" class="tabcontent">
+        <h3>PS1</h3>
+        <p>Ini adalah PS1</p>
+      </div>
+      
+      <div id="PS2" class="tabcontent">
+        <h3>PS2</h3>
+        <p>Ini adalah PS2</p>
+      </div>
+      
+      <div id="PS3" class="tabcontent">
+        <h3>PS3</h3>
+        <p>Ini adalah PS3</p>
+      </div>
+
+      <div id="PS4" class="tabcontent">
+        <h3>PS4</h3>
+        <p>Ini adalah PS4</p>
+      </div>
+      
+      <div id="PS5" class="tabcontent">
+        <h3>PS5</h3>
+        <p>Ini adalah PS5</p>
+      </div>
+      
+      <div id="XBOX_360" class="tabcontent">
+        <h3>XBOX_360</h3>
+        <p>Ini adalah XBOX 360</p>
+      </div>
+
+      <div id="XBOX_ONE" class="tabcontent">
+        <h3>XBOX_ONE</h3>
+        <p>Ini adalah XBOX ONE</p>
+      </div>
+
+      <div id="Nintendo_Switch" class="tabcontent">
+        <h3>Nintendo_Switch</h3>
+        <p>Ini adalah Nintendo Switch</p>
+      </div>
+
+      <div id="Nintendo_DS" class="tabcontent">
+        <h3>Nintendo_DS</h3>
+        <p>Ini adalah Nintendo DS</p>
+      </div>
+
+      <div id="Nintendo_3DS" class="tabcontent">
+        <h3>Nintendo_3DS</h3>
+        <p>Ini adalah Nintendo 3DS</p>
+      </div>
+
+      <div id="PSP" class="tabcontent">
+        <h3>PSP</h3>
+        <p>Ini adalah PSP</p>
+      </div>
+
+      <div id="PS_VITA" class="tabcontent">
+        <h3>PS_VITA</h3>
+        <p>Ini adalah PS VITA</p>
+      </div>
+
+      <script>
+
+        function openCity(evt, cityName) {
+          // Declare all variables
+            var i, tabcontent, tablinks, tab2, SonyConsole, Microsoft, Nintendo_Console, NintendoHandheld, SonyHandheld ;
+
+          tablinks = document.getElementsByClassName("tablinks");
+          SonyConsole = document.getElementsByClassName("SonyConsole");
+          Microsoft = document.getElementsByClassName("Microsoft");
+          Nintendo_Console = document.getElementsByClassName("Nintendo_Console");
+          NintendoHandheld = document.getElementsByClassName("NintendoHandheld");
+          SonyHandheld = document.getElementsByClassName("SonyHandheld");
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          //reset display tab 2
+          
+          for (i = 0; i < SonyConsole.length; i++) {
+            SonyConsole[i].style.display = "none";
+          }
+
+          for (i = 0; i < Microsoft.length; i++) {
+            Microsoft[i].style.display = "none";
+          }
+
+          for (i = 0; i < NintendoHandheld.length; i++) {
+            NintendoHandheld[i].style.display = "none";
+          }
+
+          for (i = 0; i < Nintendo_Console.length; i++) {
+            Nintendo_Console[i].style.display = "none";
+          }
+
+          for (i = 0; i < SonyHandheld.length; i++) {
+            SonyHandheld[i].style.display = "none";
+          }
+
+          // Get all elements with class="tablinks" and remove the class "active"
+         
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          for (i = 0; i < SonyConsole.length; i++) {
+            SonyConsole[i].className = SonyConsole[i].className.replace(" active", "");
+          }
+
+          for (i = 0; i < Microsoft.length; i++) {
+            Microsoft[i].className = Microsoft[i].className.replace(" active", "");
+          }
+
+          for (i = 0; i < NintendoHandheld.length; i++) {
+            NintendoHandheld[i].className = NintendoHandheld[i].className.replace(" active", "");
+          }
+
+          for (i = 0; i < Nintendo_Console.length; i++) {
+            Nintendo_Console[i].className = Nintendo_Console[i].className.replace(" active", "");
+          }
+
+          for (i = 0; i < SonyHandheld.length; i++) {
+            SonyHandheld[i].className = SonyHandheld[i].className.replace(" active", "");
+          }
+
+          // Show the current tab, and add an "active" class to the link that opened the tab
+          //document.getElementsByClassName(cityName).style.display = "block";
+
+          var ActiveTab = document.getElementsByClassName(cityName);
+          for(i = 0; i<ActiveTab.length; i++)
+          {
+            ActiveTab[i].style.display="block"
+          }
+
+          evt.currentTarget.className += " active";
+          console.log(cityName)
+        }
+
+        function openCity2(evt, cityName)
+        {
+           // Declare all variables
+           var i, tabcontent, tablinks, tab2, SonyConsole, Microsoft, Nintendo_Console, NintendoHandheld, SonyHandheld ;
+        
+            tablinks = document.getElementsByClassName("tablinks");
+            SonyConsole = document.getElementsByClassName("SonyConsole");
+            Microsoft = document.getElementsByClassName("Microsoft");
+            Nintendo_Console = document.getElementsByClassName("Nintendo_Console");
+            NintendoHandheld = document.getElementsByClassName("NintendoHandheld");
+            SonyHandheld = document.getElementsByClassName("SonyHandheld");
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+              tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            //var type = evt.currentTarget.className
+            // var typelist = document.getElementsByClassName(type)
+            // for(i=0; i<typelist.length; i++)
+            // {
+            //   typelist[i].className = typelist[i].className.replace(" active")
+            // }
+         
+            for (i = 0; i < SonyConsole.length; i++) {
+              SonyConsole[i].className = SonyConsole[i].className.replace(" active", "");
+            }
+
+            for (i = 0; i < Microsoft.length; i++) {
+              Microsoft[i].className = Microsoft[i].className.replace(" active", "");
+            }
+
+            for (i = 0; i < NintendoHandheld.length; i++) {
+              NintendoHandheld[i].className = NintendoHandheld[i].className.replace(" active", "");
+            }
+
+            for (i = 0; i < Nintendo_Console.length; i++) {
+              Nintendo_Console[i].className = Nintendo_Console[i].className.replace(" active", "");
+            }
+
+            for (i = 0; i < SonyHandheld.length; i++) {
+              SonyHandheld[i].className = SonyHandheld[i].className.replace(" active", "");
+            }
+
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+
+        }
+        
+        document.getElementById("defaultOpen").click();
+        document.getElementById("defaultOpen2").click();
+
+    </script>
+      
+    
+</body>
+</html>

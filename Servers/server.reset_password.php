@@ -124,4 +124,6 @@
         echo mysqli_error($conn);
     }
 
+    mysqli_close($conn);
+
 ?>

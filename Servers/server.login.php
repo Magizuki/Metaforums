@@ -44,5 +44,7 @@
     {
         echo "<script>alert('Username/Email atau Password Salah')</script>";
     }
+
+    mysqli_close($conn);
     
 ?>

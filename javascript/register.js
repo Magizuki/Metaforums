@@ -85,7 +85,7 @@ function handleRegisterForm() {
     if((username.length < 6 || username.length > 20 ) || username.match(patt1) != username )
     {        
         document.getElementById('errorMessage').innerHTML = "Username is already taken/ Username must only contain alphanumeric characters / Username must be between 6 and 20 characters long"
-        return
+        return 
     }
     if(password.length < 8 )
     {   document.getElementById('errorMessage').innerHTML = "Password must be at least 8 characters long"
