@@ -14,6 +14,11 @@
             color: gray;
         }
 
+        h1:hover
+        {
+            color: blue;
+        }
+
         .container{
             text-align: center;
             margin: auto;
@@ -50,7 +55,8 @@
         <br>
         <br>
         <div class="container">
-            <h1>Metaforums</h1>
+            <a href="../Home.php"><h1 style="display: inline-block;">Metaforums</h1></a>
+            <br>
             <br>
             <form method="POST">
                 <div class="form-group">
