@@ -155,6 +155,14 @@
             color: orangered;
         }
 
+        td{
+            width: 100%;
+        }
+
+        td span{
+            margin-left:10px;
+        }
+
     </style>
 </head>
 <body>
@@ -297,14 +305,17 @@
                             {
                                 if($id_subtopic[$i] == $row['threadsubtopic_id'])
                                 {
+                                    $query_getUser = "SELECT * FROM user WHERE id = '$row[creator_id]'";
+                                    $result_getUser = mysqli_query($conn, $query_getUser);
+                                    $row_getUser = mysqli_fetch_assoc($result_getUser);
                                     echo "<tr><td class ='".$subtopic[$i]."'>";
                                     if(strlen($row['title']) > 100)
                                     {
-                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/views/threadDetail/ViewThread.php?id=".$row['id']."'>".substr($row['title'], 0, 100)."...</a>";
+                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/views/threadDetail/ViewThread.php?id=".$row['id']."'>".substr($row['title'], 0, 100)."...</a> <span class='".$subtopic[$i]."'> by ".$row_getUser['username']."</span>";
                                     }
                                     else
                                     {
-                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/views/threadDetail/ViewThread.php?id=".$row['id']."'>".$row['title']."</a>";
+                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/views/threadDetail/ViewThread.php?id=".$row['id']."'>".$row['title']."</a> <span class='".$subtopic[$i]."'> by ".$row_getUser['username']."</span>";
                                     }
                                     echo "</td></tr>";
                                     break;    

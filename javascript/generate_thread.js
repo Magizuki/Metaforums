@@ -46,7 +46,7 @@ function generateSubTopic(evt, targetClass) {
   console.log(targetClass);
   for(i = 0; i<ActiveTab.length; i++)
   {
-    ActiveTab[i].style.display="block"
+    ActiveTab[i].style.display="block";
   }
 
   evt.currentTarget.className += " active";
@@ -69,7 +69,7 @@ function generateThread(evt, targetClass)
       }
  
   }
-  console.log(topics);
+  //console.log(topics);
   for (i = 0; i < topics.length; i++) {
       var topic_element = document.getElementsByClassName(topics[i]);
       for(j = 0; j <  topic_element.length; j++)
@@ -81,9 +81,10 @@ function generateThread(evt, targetClass)
   }
 
   var ActiveTab = document.getElementsByClassName(targetClass);
+  //console.log(ActiveTab);
   for(i = 0; i<ActiveTab.length; i++)
   {
-      ActiveTab[i].style.display="block"
+      ActiveTab[i].style.display="inline-block";
   }
   evt.currentTarget.className += " active";
       
