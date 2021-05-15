@@ -24,6 +24,7 @@
             margin: auto;
         }
 
+
         h1{
             color: gray;
         }
