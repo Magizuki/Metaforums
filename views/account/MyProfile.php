@@ -51,6 +51,7 @@
     $user->set_moderationstatus($row['moderationstatus']);
     $user->set_logindate($row['logindate']);
     $user->set_emailverifystatus($row['emailverifystatus']);
+    $user->set_aboutme($row['aboutme']);
 ?>
     <br>
     <div class="container-fluid">
@@ -100,7 +101,7 @@
                 <div class="card col-lg-8" style="padding:0px; width: 75%; height: 100%">
                     <div class="card-body">
                         <h4 class="card-title">About Me</h4>
-                        <p class="card-text"><?php echo $row['aboutme']; ?></p>
+                        <p class="card-text"><?php echo $user->get_aboutme(); ?></p>
                     </div>
                     <div class="card-group" style="height: 80%;">
                         <div class="card">
@@ -160,7 +161,79 @@
     </div>
     <div id="Account_Management" class="container-fluid">
         <br>
-    
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label for="displayname" class="col-sm-2 col-form-label">Display Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="displayname" placeholder="Display Name" value="<?php echo $user->get_username(); ?>">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label for="about" class="col-sm-2 col-form-label">About</label>
+                <div class="col-sm-10">
+                    <textarea name="about" id="about" class="form-control" cols="50" rows="5" placeholder="About"><?php echo $user->get_aboutme(); ?></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label for="avatar" class="col-sm-2 col-form-label">Avatar</label>
+                <div class="col-sm-10">
+                    <div class="form-control" style="height: 100%; width: 50%; display: inline-block;">
+                        <input type="file" class="custom-file-input" id="customFile">
+                    </div>
+                    <img src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 10px; width: 150px; height: 150px; margin-right: 150px; float:right">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
+                </div>
+            </div>                         
+        </form>
+        <br>
+        <div class="container-fluid" style="background-color: aquamarine; height: 50px; width: 100%; padding-top: 10px;">
+            <span>Changing the fields below require you to access the link sent into your associated e-mail's inbox</span>
+        </div>
+        <br>
+        <form method="post">
+            <div class="form-group row">
+                <label for="changepassword" class="col-sm-2 col-form-label">Change Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" style="width: 30%; display: inline-block;" id="newpass" placeholder="New Password">
+                    <input type="password" class="form-control" style="width: 35%; display: inline-block; margin-left: 10px;" id="confpass" placeholder="Confirm Password">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label">Email Address</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="email" <?php if($user->get_emailverifystatus() != 1) echo "readonly"; ?> value="<?php echo $user->get_email(); ?>" placeholder="Email">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label for="deleteaccount" class="col-sm-2 col-form-label">Delete Account</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="deleteaccount" placeholder="Re:Input your username here and submit">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label for="currentpass" class="col-sm-2 col-form-label">Current Password</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="currentpass" placeholder="Input your password to submit changes">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary btn-lg">SUBMIT CHANGES</button>
+                </div>
+            </div>
+        </form>
+        <br>     
     </div>
     <br>
 <script src="../../javascript/generate_AccountData.js"></script>

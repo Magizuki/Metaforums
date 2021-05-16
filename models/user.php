@@ -13,6 +13,7 @@ class user
     private $logindate;
     private $moderationstatus;
     private $address;
+    private $aboutme;
 
     function get_id()
     {
@@ -122,6 +123,16 @@ class user
     function set_address($address)
     {
         $this->address = $address;
+    }
+
+    function get_aboutme()
+    {
+        return $this->aboutme;
+    }
+
+    function set_aboutme($aboutme)
+    {
+        $this->aboutme = $aboutme;
     }
 
 }

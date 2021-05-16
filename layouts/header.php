@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <!-- <div class="row"> -->
             <span>
-                <a href="http://localhost/Metaforums/Servers/auth/Logout.php">LOGOUT</a>
+                <a href="http://localhost/Metaforums/views/auth/Logout.php">LOGOUT</a>
             </span>
             <span style="margin-left:35%;">
                 <a href="http://localhost/Metaforums/views/Home.php"><h1 style="display: inline-block;">Metaforums</h1></a>
@@ -25,7 +25,7 @@
     <div class="container-fluid">
         <!-- <div class="row"> -->
             <span>
-                <a href="http://localhost/Metaforums/Servers/auth/Logout.php">LOGOUT</a>
+                <a href="http://localhost/Metaforums/views/auth/Logout.php">LOGOUT</a>
             </span>
             <span style="margin-left:35%;">
                 <a href="http://localhost/Metaforums/views/Home.php"><h1 style="display: inline-block;">Metaforums</h1></a>
