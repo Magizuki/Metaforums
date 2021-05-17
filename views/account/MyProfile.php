@@ -190,7 +190,7 @@
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
                     <button type="submit" id="save" class="btn btn-primary btn-lg">SAVE</button>
-                    <div id="headerspinner" style="display: none;" class="spinner-border text-primary" role="status">
+                    <div id="headerspinner" class="spinner-border text-primary" role="status">
                     </div>
                 </div>
             </div>                         
@@ -233,7 +233,7 @@
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
                     <button type="submit" id="submitchanges" class="btn btn-primary btn-lg">SUBMIT CHANGES</button>
-                    <div id="detailspinner" style="display: none;" class="spinner-border text-primary" role="status">
+                    <div id="detailspinner"  class="spinner-border text-primary" role="status">
                     </div>
                 </div>
             </div>
@@ -248,13 +248,21 @@
     $('#headerform').submit(checkUsername)
     $('#detailform').submit(checkEmail)
 
-    // $('#headerspinner').hide()  // Hide it initially
-    // .ajaxStart(function() {
-    //     $(this).show();
-    // })
-    // .ajaxStop(function() {
-    //     $(this).hide();
-    // })
+    $('#headerspinner').hide()  // Hide it initially
+    .ajaxStart(function() {
+        $(this).show();
+    })
+    .ajaxStop(function() {
+        $(this).hide();
+    })
+
+    $('#detailspinner').hide()  // Hide it initially
+    .ajaxStart(function() {
+        $(this).show();
+    })
+    .ajaxStop(function() {
+        $(this).hide();
+    })
 
     function checkUsername(e)
     {
@@ -266,10 +274,10 @@
             id : <?php echo $user->get_id(); ?>,
             username : $('#displayname').val() 
         },
-        onLoading: function(){
-            var spinner = document.getElementById('headerspinner')
-            spinner.style.display = "inline-block"
-        },
+        // onLoading: function(){
+        //     var spinner = document.getElementById('headerspinner')
+        //     spinner.style.display = "inline-block"
+        // },
         success: function(data)
         {
             console.log(data);
@@ -299,10 +307,10 @@
         data: {
             email : $('#email').val() 
         },
-        onLoading: function(){
-            var spinner = document.getElementById('detailspinner')
-            spinner.style.display = "inline-block"
-        },
+        // onLoading: function(){
+        //     var spinner = document.getElementById('detailspinner')
+        //     spinner.style.display = "inline-block"
+        // },
         success: function(data)
         {
             console.log(data);

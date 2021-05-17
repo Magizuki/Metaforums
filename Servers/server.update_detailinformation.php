@@ -117,14 +117,17 @@
         $var1 = "email = '".$email."' ";
         $var3 = "emailverifystatus = '0'";
         sendEmail($email);
+        $query = "UPDATE user SET $var1,$var3 WHERE id = '$id'";
+        $result = mysqli_query($conn, $query);
     }
     if(isset($_POST['newpass']))
     {
         $newpass = base64_encode($_POST['newpass']);
-        $var2 = "pass = '".$newpass."' "; 
+        $var2 = "pass = '".$newpass."' ";
+        $query = "UPDATE user SET $var2 WHERE id = '$id'";
+        $result = mysqli_query($conn, $query);
     }
 
-    $query = "UPDATE user SET $var1,$var2,$var3 WHERE id = '$id'";
     $result = mysqli_query($conn, $query);
 
     if($result)
