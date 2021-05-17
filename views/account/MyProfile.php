@@ -36,7 +36,7 @@
 <?php
     require_once("../../middleware/usermoderator_check.php");
     require_once("../../layouts/header.php");
-    require_once("../..//models/user.php");
+    require_once("../../models/user.php");
     $id = $_SESSION["UserID"];
     $query_getUser = "SELECT * FROM user WHERE id = '$id'";
     $result_getUser = mysqli_query($conn, $query_getUser);
@@ -52,6 +52,7 @@
     $user->set_logindate($row['logindate']);
     $user->set_emailverifystatus($row['emailverifystatus']);
     $user->set_aboutme($row['aboutme']);
+    $user->set_pass(base64_decode($row['pass']));
 ?>
     <br>
     <div class="container-fluid">
@@ -161,7 +162,7 @@
     </div>
     <div id="Account_Management" class="container-fluid">
         <br>
-        <form method="POST" enctype="multipart/form-data">
+        <form id="headerform" method="POST" enctype="multipart/form-data">
             <div class="form-group row">
                 <label for="displayname" class="col-sm-2 col-form-label">Display Name</label>
                 <div class="col-sm-10">
@@ -188,7 +189,9 @@
             <br>
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
-                    <button type="submit" class="btn btn-primary btn-lg">SAVE</button>
+                    <button type="submit" id="save" class="btn btn-primary btn-lg">SAVE</button>
+                    <div id="headerspinner" style="display: none;" class="spinner-border text-primary" role="status">
+                    </div>
                 </div>
             </div>                         
         </form>
@@ -197,7 +200,7 @@
             <span>Changing the fields below require you to access the link sent into your associated e-mail's inbox</span>
         </div>
         <br>
-        <form method="post">
+        <form id="detailform" method="post">
             <div class="form-group row">
                 <label for="changepassword" class="col-sm-2 col-form-label">Change Password</label>
                 <div class="col-sm-10">
@@ -229,7 +232,9 @@
             <br>
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
-                    <button type="submit" class="btn btn-primary btn-lg">SUBMIT CHANGES</button>
+                    <button type="submit" id="submitchanges" class="btn btn-primary btn-lg">SUBMIT CHANGES</button>
+                    <div id="detailspinner" style="display: none;" class="spinner-border text-primary" role="status">
+                    </div>
                 </div>
             </div>
         </form>
@@ -237,6 +242,203 @@
     </div>
     <br>
 <script src="../../javascript/generate_AccountData.js"></script>
+<script>
+    var email, username, newpass, id, image
+
+    $('#headerform').submit(checkUsername)
+    $('#detailform').submit(checkEmail)
+
+    // $('#headerspinner').hide()  // Hide it initially
+    // .ajaxStart(function() {
+    //     $(this).show();
+    // })
+    // .ajaxStop(function() {
+    //     $(this).hide();
+    // })
+
+    function checkUsername(e)
+    {
+        e.preventDefault()
+        $.ajax({
+        type: 'POST',
+        url: 'http://localhost/Metaforums/Servers/server.check_displayname.php',
+        data: {
+            id : <?php echo $user->get_id(); ?>,
+            username : $('#displayname').val() 
+        },
+        onLoading: function(){
+            var spinner = document.getElementById('headerspinner')
+            spinner.style.display = "inline-block"
+        },
+        success: function(data)
+        {
+            console.log(data);
+            data = JSON.parse(data);
+
+            var usernameIsNotExist = data['isNotExist']
+
+            if(usernameIsNotExist == 'false')
+            {
+                alert("Username is already exist")
+                return
+            }
+
+            handle_HeaderForm(e)
+        }
+    
+    })
+
+    }
+
+    function checkEmail(e)
+    {
+        e.preventDefault()
+        $.ajax({
+        type: 'POST',
+        url: 'http://localhost/Metaforums/Servers/server.check_email.php?username=<?php echo $user->get_username(); ?>',
+        data: {
+            email : $('#email').val() 
+        },
+        onLoading: function(){
+            var spinner = document.getElementById('detailspinner')
+            spinner.style.display = "inline-block"
+        },
+        success: function(data)
+        {
+            console.log(data);
+            data = JSON.parse(data);
+
+            var EmailIsNotExist = data['isNotExist']
+
+            if(EmailIsNotExist == 'false')
+            {
+                alert("Email is already exist")
+                return
+            }
+
+            handle_DetailForm(e)
+        }
+    
+    })
+
+    }
+    
+    function handle_HeaderForm(e)
+    {
+        var fd = new FormData()
+        var files = $('#customFile')[0].files
+        var imageIsExist = 1
+        e.preventDefault()
+
+        if((($('#displayname').val()).length < 6 || ($('#displayname').val()).length > 20) || $('displayname').val() == "")
+        {
+            alert("Display name length must between 6 to 20 and Display name cannot be empty")
+            $('#displayname').val() = "<?php echo $user->get_username(); ?>"
+            return
+        }
+        if(files.length == 0)
+        {
+            imageIsExist = 0
+        }
+    
+        if(imageIsExist == 1)
+        {
+            console.log("testes")
+            fd.append('file',files)
+        }
+
+        $.ajax({
+            type:'POST',
+            url:'http://localhost/Metaforums/Servers/server.update_headerinformation.php',
+            contentType: false,
+            processData: false,
+            data:{
+                id : <?php echo $user->get_id(); ?>,
+                username : $('#displayname').val(),
+                about : $('#about').val(),
+                fd
+            },
+            onLoading:function(){
+                var spinner = document.getElementById('headerspinner')
+                spinner.style.display = "inline-block"
+            },
+            success: function(data){
+                var spinner = document.getElementById('headerspinner')
+                spinner.style.display = "none"
+                console.log(data)
+                data = JSON.parse(data);
+                if(data['status'] == 'success')
+                {
+                    window.location = 'http://localhost/Metaforums/views/account/MyProfile.php'
+                }
+                else if(data['status'] == 'failed')
+                {
+                    alert(data['error_message'])
+                }
+            }
+        });
+
+    }
+
+    function handle_DetailForm(e)
+    {
+        var newpass_isExist = 1
+        e.preventDefault()
+
+        if($('#newpass').val().length < 8 || $('#newpass').val() != $('#confpass').val())
+        {
+            alert("Length password harus lebih dari 8 dan new password harus sama dengan confirm password")
+            return
+        }
+        if($('#newpass').val() == "")
+        {
+            newpass_isExist = 0
+        }
+        if($('#currentpass').val() != '<?php echo $user->get_pass(); ?>')
+        {
+            alert("Please enter the correct password")
+            return
+        }
+        if(newpass_isExist == 1)
+        {
+            newpass = $('#newpass').val()
+        }
+        if($('#deleteaccount').val() == '<?php echo $user->get_username(); ?>')
+        {
+            window.location = "http://localhost/Metaforums/Servers/server.deleteaccount.php?id=<?php echo $user->get_id(); ?>"
+            return
+        }
+
+        $.ajax({
+            type:'POST',
+            url:'http://localhost/Metaforums/Servers/server.update_detailinformation.php',
+            data:{
+                id : <?php echo $user->get_id(); ?>,
+                email : $('#email').val(),
+                newpass
+            },
+            onLoading:function(){
+                var spinner = document.getElementById('detailspinner')
+                spinner.style.display = "inline-block"
+            },
+            success: function(data){
+                var spinner = document.getElementById('detailspinner')
+                spinner.style.display = "none"
+                data = JSON.parse(data);
+                if(data['status'] == 'success')
+                {
+                    window.location = 'http://localhost/Metaforums/views/account/MyProfile.php'
+                }
+                else if(data['status'] == 'failed')
+                {
+                    alert(data['error_message'])
+                }
+            }
+        });
+
+    }
+
+</script>
 <script>
     document.getElementById("Profile_TabLink").click()
 </script>

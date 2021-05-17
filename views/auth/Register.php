@@ -50,6 +50,13 @@
      
 </head>
 <body>
+    <?php
+        session_start();
+        if(isset($_SESSION["UserID"]))
+        {
+            header("location:http://localhost/Metaforums/views/Home.php");
+        }
+    ?>
     <div class="container-fluid">
         <a href="Login.php">LOG IN</a>
         <br>

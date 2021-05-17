@@ -45,6 +45,13 @@
     </style>
 </head>
 <body>
+    <?php
+        session_start();
+        if(isset($_SESSION["UserID"]))
+        {
+            header("location:http://localhost/Metaforums/views/Home.php");
+        }
+    ?>
     <div class="container-fluid">
         <a href="Register.php">SIGN UP</a>
         <br>
