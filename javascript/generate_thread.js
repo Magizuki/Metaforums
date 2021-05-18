@@ -74,11 +74,18 @@ function generateThread(evt, targetClass)
       var topic_element = document.getElementsByClassName(topics[i]);
       for(j = 0; j <  topic_element.length; j++)
       {
-          
-          topic_element[j].className = topic_element[j].className.replace(" active", "");
+        topic_element[j].className = topic_element[j].className.replace(" active", "");
       }
       
   }
+
+  if(document.getElementById('createThreadBtn'))
+  {
+    $('#createThreadBtn').click(function(){
+        window.location.href = "http://localhost/Metaforums/views/threadDetail/CreateThread.php?name="+targetClass
+    });
+  }
+  
 
   var ActiveTab = document.getElementsByClassName(targetClass);
   //console.log(ActiveTab);

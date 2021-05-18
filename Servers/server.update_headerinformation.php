@@ -30,6 +30,12 @@
         $query = "UPDATE user SET $var1,$var2 WHERE id = '$id'";
     }
 
+    session_start();
+    if($_POST["username"] != $_SESSION["name"])
+    {
+        $_SESSION["name"] = $_POST["username"];
+    }
+
     $result = mysqli_query($conn, $query);
 
     if($result)

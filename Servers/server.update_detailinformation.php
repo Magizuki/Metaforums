@@ -119,6 +119,12 @@
         sendEmail($email);
         $query = "UPDATE user SET $var1,$var3 WHERE id = '$id'";
         $result = mysqli_query($conn, $query);
+        session_start();
+        if($_SESSION["email"] != $_POST["email"])
+        {
+            $_SESSION["isVerified"] = 0;
+            $_SESSION["email"] = $_POST["email"];
+        }
     }
     if(isset($_POST['newpass']))
     {

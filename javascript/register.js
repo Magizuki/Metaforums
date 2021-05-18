@@ -1,6 +1,7 @@
 
 var email, username, password, confirmpassword, usernameIsNotExist, flag
 
+$('#spinner').hide()
 
 function Username_IsNotExist()
 {
@@ -31,6 +32,7 @@ function Username_IsNotExist()
 
 function submitRegisterForm()
 {
+    $('#spinner').show()
     console.log(username + " " + email + " " + password)
 
     $.ajax({
@@ -53,6 +55,7 @@ function submitRegisterForm()
             }
             else if(data['status'] == 'failed')
             {
+                $('#spinner').hide()
                 document.getElementById('errorMessage').innerHTML = data['error_message']
             }
         }

@@ -87,6 +87,8 @@
                 </div>
                 <br>
                 <div class="form-group">
+                    <div id="spinner" style="margin-left:10px;" class="spinner-border text-primary" role="status">
+                    </div>
                     <label id="errorMessage"></label>
                 </div>
             </form>

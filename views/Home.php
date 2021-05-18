@@ -194,14 +194,12 @@
         echo "<script>var subtopics = new Array()</script>";
         while($row = mysqli_fetch_assoc($result_threadsubtopic))
         {
-            //echo 2;
             $subtopic[$index] = str_replace(" ","", $row['threadsubtopic_name']);
             $id_subtopic[$index] = $row['id'];
             echo "<script>subtopics[".$index."] ='".$subtopic[$index]."'</script>";
             $index = $index + 1;
         }
         
-
         $result_threadtopic = mysqli_query($conn, $query_threadtopic);
         $result_threadsubtopic = mysqli_query($conn, $query_threadsubtopic);
         $result_thread = mysqli_query($conn, $query_thread);
@@ -217,8 +215,8 @@
                 if($_SESSION["isVerified"] == 1)
                 {
                     ?>
-                        <button class="btn btn-primary" onclick="location.href = 'threadDetail/ViewThread.php'" style="float: right; margin-left:10px">CREATE THREAD</button>
-                        <hr style="float: right; width: 77%; margin-right: 25px;">
+                        <button id="createThreadBtn" class="btn btn-primary" style="float: right; margin-left:10px">CREATE THREAD</button>
+                        <hr style="float: right; width: 73%; margin-right: 25px;">
                     <?php
                 }
                 else
@@ -311,11 +309,11 @@
                                     echo "<tr><td class ='".$subtopic[$i]."'>";
                                     if(strlen($row['title']) > 100)
                                     {
-                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/views/threadDetail/ViewThread.php?id=".$row['id']."'>".substr($row['title'], 0, 100)."...</a> <span class='".$subtopic[$i]."'> by ".$row_getUser['username']."</span>";
+                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/Metaforums/views/threadDetail/ViewThread.php?id=".$row['id']."'>".substr($row['title'], 0, 100)."...</a> <span class='".$subtopic[$i]."'> by ".$row_getUser['username']."</span>";
                                     }
                                     else
                                     {
-                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/views/threadDetail/ViewThread.php?id=".$row['id']."'>".$row['title']."</a> <span class='".$subtopic[$i]."'> by ".$row_getUser['username']."</span>";
+                                        echo "<a class='".$subtopic[$i]."' href='http://localhost/Metaforums/views/threadDetail/ViewThread.php?id=".$row['id']."'>".$row['title']."</a> <span class='".$subtopic[$i]."'> by ".$row_getUser['username']."</span>";
                                     }
                                     echo "</td></tr>";
                                     break;    
@@ -344,11 +342,11 @@
 <?php
     mysqli_close($conn);
 ?>
-
 <script src="../javascript/generate_thread.js"></script>
 <script>
     document.getElementById("defaultOpen").click();
     document.getElementById("defaultOpen2").click();
+
 </script>
 </body>
 </html>

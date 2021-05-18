@@ -130,11 +130,11 @@
                                         {
                                             if(strlen($row_thread['title']) > 100)
                                             {
-                                                echo "<a href='http://localhost/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".substr($row_thread['title'], 0, 100)."...</a> <span> by ".$user->get_username()."</span>";
+                                                echo "<a href='http://localhost/Metaforums/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".substr($row_thread['title'], 0, 100)."...</a> <span> by ".$user->get_username()."</span>";
                                             }
                                             else
                                             {
-                                                echo "<a href='http://localhost/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".$row_thread['title']."</a> <span> by ".$user->get_username()."</span>";
+                                                echo "<a href='http://localhost/Metaforums/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".$row_thread['title']."</a> <span> by ".$user->get_username()."</span>";
                                             }
                                         }
                                         else
@@ -142,11 +142,11 @@
                                             echo "<hr>";
                                             if(strlen($row_thread['title']) > 100)
                                             {
-                                                echo "<a href='http://localhost/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".substr($row_thread['title'], 0, 100)."...</a> <span> by ".$user->get_username()."</span>";
+                                                echo "<a href='http://localhost/Metaforums/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".substr($row_thread['title'], 0, 100)."...</a> <span> by ".$user->get_username()."</span>";
                                             }
                                             else
                                             {
-                                                echo "<a href='http://localhost/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".$row_thread['title']."</a> <span> by ".$user->get_username()."</span>";
+                                                echo "<a href='http://localhost/Metaforums/views/threadDetail/ViewThread.php?id=".$row_thread['id']."'>".$row_thread['title']."</a> <span> by ".$user->get_username()."</span>";
                                             }
                                         }
                                         $count = $count + 1;
@@ -190,7 +190,7 @@
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
                     <button type="submit" id="save" class="btn btn-primary btn-lg">SAVE</button>
-                    <div id="headerspinner" class="spinner-border text-primary" role="status">
+                    <div id="headerspinner" style="margin-left:10px;" class="spinner-border text-primary" role="status">
                     </div>
                 </div>
             </div>                         
@@ -233,7 +233,7 @@
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
                     <button type="submit" id="submitchanges" class="btn btn-primary btn-lg">SUBMIT CHANGES</button>
-                    <div id="detailspinner"  class="spinner-border text-primary" role="status">
+                    <div id="detailspinner" style="margin-left:10px;"  class="spinner-border text-primary" role="status">
                     </div>
                 </div>
             </div>
@@ -249,24 +249,12 @@
     $('#detailform').submit(checkEmail)
 
     $('#headerspinner').hide()  // Hide it initially
-    .ajaxStart(function() {
-        $(this).show();
-    })
-    .ajaxStop(function() {
-        $(this).hide();
-    })
-
     $('#detailspinner').hide()  // Hide it initially
-    .ajaxStart(function() {
-        $(this).show();
-    })
-    .ajaxStop(function() {
-        $(this).hide();
-    })
-
+    
     function checkUsername(e)
     {
         e.preventDefault()
+        $('#headerspinner').show()
         $.ajax({
         type: 'POST',
         url: 'http://localhost/Metaforums/Servers/server.check_displayname.php',
@@ -274,10 +262,6 @@
             id : <?php echo $user->get_id(); ?>,
             username : $('#displayname').val() 
         },
-        // onLoading: function(){
-        //     var spinner = document.getElementById('headerspinner')
-        //     spinner.style.display = "inline-block"
-        // },
         success: function(data)
         {
             console.log(data);
@@ -287,13 +271,13 @@
 
             if(usernameIsNotExist == 'false')
             {
+                $('#headerspinner').hide()
                 alert("Username is already exist")
                 return
             }
 
             handle_HeaderForm(e)
         }
-    
     })
 
     }
@@ -301,16 +285,13 @@
     function checkEmail(e)
     {
         e.preventDefault()
+        $('#detailspinner').show()
         $.ajax({
         type: 'POST',
         url: 'http://localhost/Metaforums/Servers/server.check_email.php?username=<?php echo $user->get_username(); ?>',
         data: {
             email : $('#email').val() 
         },
-        // onLoading: function(){
-        //     var spinner = document.getElementById('detailspinner')
-        //     spinner.style.display = "inline-block"
-        // },
         success: function(data)
         {
             console.log(data);
@@ -320,13 +301,13 @@
 
             if(EmailIsNotExist == 'false')
             {
+                $('#detailspinner').hide()
                 alert("Email is already exist")
                 return
             }
 
             handle_DetailForm(e)
         }
-    
     })
 
     }
@@ -340,8 +321,9 @@
 
         if((($('#displayname').val()).length < 6 || ($('#displayname').val()).length > 20) || $('displayname').val() == "")
         {
+            $('#headerspinner').hide()
             alert("Display name length must between 6 to 20 and Display name cannot be empty")
-            $('#displayname').val() = "<?php echo $user->get_username(); ?>"
+            $('#displayname').val() = "<?php echo $user->get_username(); ?>" 
             return
         }
         if(files.length == 0)
@@ -352,27 +334,29 @@
         if(imageIsExist == 1)
         {
             console.log("testes")
-            fd.append('file',files)
+            fd.append( 'file', $('#customFile')[0].files)
+            // fd.append('file',files)
         }
+
+        fd.append('id', '<?php echo $user->get_id(); ?>' )
+        fd.append('username', $('#displayname').val())
+        fd.append('about', $('#about').val())
+
+        console.log(fd)
 
         $.ajax({
             type:'POST',
             url:'http://localhost/Metaforums/Servers/server.update_headerinformation.php',
-            contentType: false,
-            processData: false,
+            headers: {
+            'Content-Type': 'multipart/form-data',
+            },
             data:{
-                id : <?php echo $user->get_id(); ?>,
-                username : $('#displayname').val(),
-                about : $('#about').val(),
+                // id : <?php //echo $user->get_id(); ?>,
+                // username : $('#displayname').val(),
+                // about : $('#about').val(),
                 fd
             },
-            onLoading:function(){
-                var spinner = document.getElementById('headerspinner')
-                spinner.style.display = "inline-block"
-            },
             success: function(data){
-                var spinner = document.getElementById('headerspinner')
-                spinner.style.display = "none"
                 console.log(data)
                 data = JSON.parse(data);
                 if(data['status'] == 'success')
@@ -381,6 +365,7 @@
                 }
                 else if(data['status'] == 'failed')
                 {
+                    $('#headerspinner').hide()
                     alert(data['error_message'])
                 }
             }
@@ -395,6 +380,7 @@
 
         if($('#newpass').val().length < 8 || $('#newpass').val() != $('#confpass').val())
         {
+            $('#detailspinner').hide()
             alert("Length password harus lebih dari 8 dan new password harus sama dengan confirm password")
             return
         }
@@ -404,6 +390,7 @@
         }
         if($('#currentpass').val() != '<?php echo $user->get_pass(); ?>')
         {
+            $('#detailspinner').hide()
             alert("Please enter the correct password")
             return
         }
@@ -425,13 +412,7 @@
                 email : $('#email').val(),
                 newpass
             },
-            onLoading:function(){
-                var spinner = document.getElementById('detailspinner')
-                spinner.style.display = "inline-block"
-            },
             success: function(data){
-                var spinner = document.getElementById('detailspinner')
-                spinner.style.display = "none"
                 data = JSON.parse(data);
                 if(data['status'] == 'success')
                 {
@@ -439,6 +420,7 @@
                 }
                 else if(data['status'] == 'failed')
                 {
+                    $('#detailspinner').hide()
                     alert(data['error_message'])
                 }
             }
