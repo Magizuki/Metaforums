@@ -82,7 +82,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card col-lg-8" style="padding:0px; width: 75%; height: 100%">
+                <div class="card col-lg-8" style="padding: 0px; width: 75%; height: 100%">
                     <div class="card-body">
                         <h4 class="card-title">About Me</h4>
                         <p class="card-text"><?php echo $row['aboutme']; ?></p>

@@ -12,7 +12,7 @@
             <span style="margin-left:35%;">
                 <a href="http://localhost/Metaforums/views/Home.php"><h1 style="display: inline-block;">Metaforums</h1></a>
             </span>
-            <span style="margin-left:35%">
+            <span style="float: right; margin-top: 20px;">
                 <a href="http://localhost/Metaforums/views/account/MyProfile.php">ACCOUNT</a>
             </span>
         <!-- </div> -->
@@ -30,10 +30,10 @@
             <span style="margin-left:35%;">
                 <a href="http://localhost/Metaforums/views/Home.php"><h1 style="display: inline-block;">Metaforums</h1></a>
             </span>
-            <span style="margin-left:22%">
+            <span style="margin-top: 20px; float: right;">
                 <a href="">USER MANAGEMENT</a>
             </span>
-            <span style="margin-left:2%">
+            <span style="margin-top: 20px; float: right;">
                 <a href="http://localhost/Metaforums/views/account/MyProfile.php">ACCOUNT</a>
             </span>
         <!-- </div> -->
