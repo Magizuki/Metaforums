@@ -120,7 +120,7 @@
                                 <br>
                                 <?php
                                     $id = $user->get_id();
-                                    $query_get5RecentThread = "SELECT * FROM thread WHERE creator_id = '$id' ORDER BY id DESC LIMIT 10";
+                                    $query_get5RecentThread = "SELECT * FROM thread WHERE creator_id = '$id' ORDER BY id DESC LIMIT 5";
                                     $result_get5RecentThread = mysqli_query($conn, $query_get5RecentThread);
                                     echo mysqli_error($conn);
                                     $count = 1;
@@ -181,9 +181,9 @@
                 <label for="avatar" class="col-sm-2 col-form-label">Avatar</label>
                 <div class="col-sm-10">
                     <div class="form-control" style="height: 100%; width: 50%; display: inline-block;">
-                        <input type="file" class="custom-file-input" id="customFile">
+                        <input type="file" class="custom-file-input" id="customFile" style="width: 100%;">
                     </div>
-                    <img src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 10px; width: 150px; height: 150px; margin-right: 150px; float:right">
+                    <img id="avatar" src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 10px; width: 30%; height: 80%;  float:right">
                 </div>
             </div>
             <br>
@@ -196,8 +196,9 @@
             </div>                         
         </form>
         <br>
-        <div class="container-fluid" style="background-color: aquamarine; height: 50px; width: 100%; padding-top: 10px;">
-            <span>Changing the fields below require you to access the link sent into your associated e-mail's inbox</span>
+        <br>
+        <div class="container-fluid" style="background-color: aquamarine; height: 400%; width: 100%; padding-top: 10px; padding-bottom: 10px;">
+            <span style="width: 100%; height: 100%;">Changing the fields below require you to access the link sent into your associated e-mail's inbox</span>
         </div>
         <br>
         <form id="detailform" method="post">
@@ -314,8 +315,10 @@
     
     function handle_HeaderForm(e)
     {
-        var fd = new FormData()
+        
         var files = $('#customFile')[0].files
+        console.log(files)
+
         var imageIsExist = 1
         e.preventDefault()
 
@@ -334,34 +337,71 @@
         if(imageIsExist == 1)
         {
             console.log("testes")
-            fd.append( 'file', $('#customFile')[0].files)
-            // fd.append('file',files)
-        }
+            //fd.append( 'file', $('#customFile')[0].files)
+            var fd = new FormData()
+            console.log(files[0])
+            fd.append('file1',files[0])
+            //fd.append('file1',document.getElementById('customFile').files[0])
+            for(var pair of fd.entries()) {
+                console.log(pair[0]+ ', '+ pair[1]); 
+            }
 
-        fd.append('id', '<?php echo $user->get_id(); ?>' )
-        fd.append('username', $('#displayname').val())
-        fd.append('about', $('#about').val())
-
-        console.log(fd)
-
-        $.ajax({
+            $.ajax({
+            cache: false,
+            method: 'POST',
+            enctype: 'multipart/form-data',
+            data: fd,
             type:'POST',
-            url:'http://localhost/Metaforums/Servers/server.update_headerinformation.php',
-            headers: {
-            'Content-Type': 'multipart/form-data',
-            },
-            data:{
-                // id : <?php //echo $user->get_id(); ?>,
-                // username : $('#displayname').val(),
-                // about : $('#about').val(),
-                fd
-            },
+            url:'http://localhost/Metaforums/Servers/server.change_avatar.php',
+            contentType: false,
+            processData: false,
             success: function(data){
                 console.log(data)
                 data = JSON.parse(data);
                 if(data['status'] == 'success')
                 {
-                    window.location = 'http://localhost/Metaforums/views/account/MyProfile.php'
+                    $('#headerspinner').hide()
+                    document.getElementById('avatar').src = data['avatar']
+                    //window.location = 'http://localhost/Metaforums/views/account/MyProfile.php'
+                }
+                else if(data['status'] == 'failed')
+                {
+                    $('#headerspinner').hide()
+                    alert(data['error_message'])
+                }
+            }
+            });
+
+            
+        }
+
+        // var other_data = $('headerform').serializeArray();
+        // $.each(other_data,function(key,input){
+        //     fd.append(input.id,input.value);
+        // });
+
+        // fd.append('id', <?php //echo $user->get_id(); ?> )
+        // fd.append('username', $('#displayname').val())
+        // fd.append('about', $('#about').val())
+        
+        //console.log(fd)
+
+        $.ajax({
+            type:'POST',
+            url:'http://localhost/Metaforums/Servers/server.update_headerinformation.php',
+            data:{
+                id : <?php echo $user->get_id(); ?>,
+                username : $('#displayname').val(),
+                about : $('#about').val(),
+                //fd
+            },
+            success: function(data){
+                $('#headerspinner').hide()
+                console.log(data)
+                data = JSON.parse(data);
+                if(data['status'] == 'success')
+                {
+                    //window.location = 'http://localhost/Metaforums/views/account/MyProfile.php'
                 }
                 else if(data['status'] == 'failed')
                 {

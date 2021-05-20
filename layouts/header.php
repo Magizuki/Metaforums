@@ -31,9 +31,9 @@
                 <a href="http://localhost/Metaforums/views/Home.php"><h1 style="display: inline-block;">Metaforums</h1></a>
             </span>
             <span style="margin-top: 20px; float: right;">
-                <a href="">USER MANAGEMENT</a>
+                <a href="http://localhost/Metaforums/views/ComingSoon.php">USER MANAGEMENT</a>
             </span>
-            <span style="margin-top: 20px; float: right;">
+            <span style="margin-top: 20px; margin-right: 10px; float: right;">
                 <a href="http://localhost/Metaforums/views/account/MyProfile.php">ACCOUNT</a>
             </span>
         <!-- </div> -->

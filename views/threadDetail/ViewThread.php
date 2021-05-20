@@ -108,12 +108,12 @@
                 <?php
                     if($row['creator_id'] == $_SESSION['UserID'])
                     {
-                        echo "<button type='button' class='btn btn-outline-warning' style='float: right;' data-toggle='modal' data-target='.bd-example-modal-xl'>EDIT</button>";
+                        echo "<button type='button' id='editBtn' class='btn btn-outline-warning' style='float: right;' >EDIT</button>";
                         echo "<button id='deleteThreadbtn' type='button' class='btn btn-outline-danger' style='float: right; margin-right: 10px;'>DELETE</button>";
                     }
                 ?>
                 <button type="button" class="btn btn-outline-info" style="float: right; margin-right: 10px;" data-toggle="modal" data-target=".bd-example-modal-lg">REPLY</button>
-                <button type="button" class="btn btn-outline-primary" style="float: right; margin-right: 10px;">REPORT</button>
+                <button type="button" class="btn btn-outline-primary" onclick="window.location = '../ComingSoon.php'" style="float: right; margin-right: 10px;">REPORT</button>
             </div>
         </div>
         <br>
@@ -126,6 +126,7 @@
             
             while($row_GetReply = mysqli_fetch_assoc($result_GetReply))
             {
+                // var_dump($row_GetReply);
                 $id_UserReply = $row_GetReply['user_id'];
                 $query_GetUserReply = "SELECT * FROM user WHERE id = '$id_UserReply'";
                 $result_GetUserReply = mysqli_query($conn, $query_GetUserReply);
@@ -172,18 +173,24 @@
                         if($row_GetReply['user_id'] == $_SESSION['UserID'])
                         {
                             echo "<button type='button' class='btn btn-outline-warning' style='float: right;' data-toggle='modal' data-target='.bd-example-modal-xl'>EDIT</button>";
-                            echo "<button id='deleteReplyThreadbtn' type='button' class='btn btn-outline-danger' style='float: right; margin-right: 10px;'>DELETE</button>";
+                            echo "<button id='deleteReplyThreadbtn' onclick = 'deleteReply(".$row_GetReply['id'].");'  type='button' class='btn btn-outline-danger' style='float: right; margin-right: 10px;'>DELETE</button>";
                         }
                         ?>
-                        <button type="button" class="btn btn-outline-primary" style="float: right; margin-right: 10px;">REPORT</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="window.location = '../ComingSoon.php'" style="float: right; margin-right: 10px;">REPORT</button>
                     </div>
                 </div>
                 <br>
                 <br>
                 <?php
             }
-
         ?>
+
+        <script>
+            function deleteReply(idReply)
+            {
+                window.location.href = "http://localhost/Metaforums/Servers/server.delete_reply.php?ReplyID="+idReply+"&"+"ThreadID="+<?php echo $row['id']; ?>
+            }
+        </script>
 
         <!-- Modal Send Reply -->
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
@@ -231,7 +238,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="editThread();" class="btn btn-primary">SUBMIT</button>
+                        <button type="button" onclick="editThread();" class="btn btn-primary" data-dismiss="modal" aria-label="Close">SUBMIT</button>
                     </div> 
                 </div>
             </div>
@@ -245,6 +252,11 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script> -->
 
 <script>
+
+    $(document).ready(function(){
+        $("#editBtn").attr("data-toggle",'modal');
+        $("#editBtn").attr("data-target",'.bd-example-modal-xl');
+    });
 
     function sendReply()
     {
@@ -315,9 +327,9 @@
 
                     document.getElementById("title").innerHTML = title
                     document.getElementById("message").innerHTML = message
-                    $('#modalUpdate').hide()
-                    $('body').removeClass('modal-open');
-                    $('.modal-backdrop').remove();
+                    // $('#modalUpdate').hide()
+                    // $('body').removeClass('modal-open');
+                    // $('.modal-backdrop').remove();
                     //$('#modalUpdate').modal('hide')
                     
                     //$('#title').val = title

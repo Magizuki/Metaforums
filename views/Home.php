@@ -295,7 +295,7 @@
         ?>
         </div>
         <div class="tab3">
-            <table class="table table-striped">
+            <table class="table">
                 <tbody>
                 <?php
                     if(mysqli_num_rows($result_thread) > 0)
