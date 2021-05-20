@@ -23,6 +23,7 @@
         $_SESSION["role"] = $row["roles"];
         $_SESSION["email"] = $row["email"];
         $_SESSION["isVerified"] = $row["emailverifystatus"];
+        $_SESSION['avatar'] = $row['avatar'];
 
         $id = $_SESSION["UserID"];
         $date = date("Y-m-d h:i:sa");

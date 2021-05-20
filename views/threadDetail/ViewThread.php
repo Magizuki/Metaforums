@@ -77,7 +77,7 @@
                 <div class="card col-lg-3" style="padding:0px; width:20%">
                     <div class="card-body" style=" margin: auto; text-align: center;">
                         <br>
-                        <img class="card-title" src="<?php echo $row4['avatar']; ?>" alt="Profile Image" style="border-radius: 10px; width: 100px; height: 100px; text-align:center">
+                        <img class="card-title" src="<?php echo $row4['avatar']; ?>" alt="Profile Image" style="border-radius: 50px; width: 100px; height: 100px; text-align:center">
                         <br>
                         <a href="http://localhost/Metaforums/views/account/UserProfile.php?id=<?php echo $row4['id'] ?>"><span class="card-text"> <?php echo $row4['username'];?></span></a>
                         <br>
@@ -141,7 +141,7 @@
                         <div class="card col-lg-3" style="padding:0px; width:20%">
                             <div class="card-body" style=" margin: auto; text-align: center;">
                                 <br>
-                                <img class="card-title" src="<?php echo $row_GetUserReply['avatar']; ?>" alt="Profile Image" style="border-radius: 10px; width: 100px; height: 100px; text-align:center">
+                                <img class="card-title" src="<?php echo $row_GetUserReply['avatar']; ?>" alt="Profile Image" style="border-radius: 50px; width: 100px; height: 100px; text-align:center">
                                 <br>
                                 <a href="http://localhost/Metaforums/views/account/UserProfile.php?id=<?php echo $row_GetUserReply['id'] ?>"><span class="card-text"> <?php echo $row_GetUserReply['username'];?></span></a>
                                 <br>

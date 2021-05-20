@@ -80,7 +80,7 @@
                 <div class="card col-lg-3" style="padding:0px;height: 100%;">
                     <div class="card-body" style="height: 300px; margin: auto; text-align: center;">
                         <br>
-                        <img class="card-title" src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 10px; width: 100px; height: 100px; text-align:center">
+                        <img class="card-title" src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 50px; width: 100px; height: 100px; text-align:center">
                         <br>
                         <span class="card-text"> <?php echo $user->get_username();?></span>
                         <br>
@@ -183,7 +183,7 @@
                     <div class="form-control" style="height: 100%; width: 50%; display: inline-block;">
                         <input type="file" class="custom-file-input" id="customFile" style="width: 100%;">
                     </div>
-                    <img id="avatar" src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 10px; width: 30%; height: 80%;  float:right">
+                    <img id="avatar" src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 200px; width: 30%; height: 80%;  float:right">
                 </div>
             </div>
             <br>
@@ -361,6 +361,7 @@
                 if(data['status'] == 'success')
                 {
                     $('#headerspinner').hide()
+                   // $('avatar').attr("src","<?//php echo $_SESSION['avatar']; ?>")
                     document.getElementById('avatar').src = data['avatar']
                     //window.location = 'http://localhost/Metaforums/views/account/MyProfile.php'
                 }

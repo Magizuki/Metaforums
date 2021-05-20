@@ -63,7 +63,7 @@
                 <div class="card col-lg-3" style="padding:0px;height: 100%;">
                     <div class="card-body" style="height: 300px; margin: auto; text-align: center;">
                         <br>
-                        <img class="card-title" src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 10px; width: 100px; height: 100px; text-align:center">
+                        <img class="card-title" src="<?php echo $user->get_avatar(); ?>" alt="Profile Image" style="border-radius: 50px; width: 100px; height: 100px; text-align:center">
                         <br>
                         <span class="card-text"> <?php echo $user->get_username();?></span>
                         <br>
