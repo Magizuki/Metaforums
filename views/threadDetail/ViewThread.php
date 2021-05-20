@@ -172,7 +172,6 @@
                         <?php
                         if($row_GetReply['user_id'] == $_SESSION['UserID'])
                         {
-                            echo "<button type='button' class='btn btn-outline-warning' style='float: right;' data-toggle='modal' data-target='.bd-example-modal-xl'>EDIT</button>";
                             echo "<button id='deleteReplyThreadbtn' onclick = 'deleteReply(".$row_GetReply['id'].");'  type='button' class='btn btn-outline-danger' style='float: right; margin-right: 10px;'>DELETE</button>";
                         }
                         ?>
